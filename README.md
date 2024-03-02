@@ -1,30 +1,31 @@
-# React + TypeScript + Vite
+# LapTrack
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+LapTrack is a web development project using React, TypeScript, and Vite. This project is aimed at managing and tracking laptops in an inventory system.
 
-Currently, two official plugins are available:
+## Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- React: A JavaScript library for building user interfaces.
+- TypeScript: An open-source language which builds on JavaScript by adding static type definitions.
+- Vite: A build tool that aims to provide a faster and leaner development experience for modern web projects.
 
-## Expanding the ESLint configuration
+## Getting Started
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+To get a local copy up and running, follow these simple steps:
 
-- Configure the top-level `parserOptions` property like this:
+1. Clone the repo
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+   ```bash
+    git clone https://github.com/bakaqc/labtrack.git
+   ```
+   
+2. Install NPM packages
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+   ```bash
+    npm install
+   ```
+
+3. Run the App
+
+   ```bash
+    npm run dev
+   ```
