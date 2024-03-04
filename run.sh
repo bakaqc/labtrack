@@ -1,0 +1,1 @@
+npx json-server ./server/database.json -p 5555
