@@ -24,13 +24,13 @@ To get a local copy up and running, follow these simple steps:
 2. Install packages
 
    ```bash
-    npm i
+    yarn
    ```
 
 3. Run the App
 
    ```bash
-    npm run dev
+    yarn dev
    ```
 
 4. Run the `json-server` for the API
