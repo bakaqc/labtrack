@@ -1,4 +1,4 @@
-export type ProductInfo = {
+declare type ProductInfo = {
 	id: number;
 	name: string;
 	description: string;
