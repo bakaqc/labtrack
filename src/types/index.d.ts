@@ -6,3 +6,9 @@ declare type ProductInfo = {
 	currentPrice: string;
 	image: string;
 };
+
+declare type AdminAccount = {
+	id: number;
+	username: string;
+	password: string;
+};
