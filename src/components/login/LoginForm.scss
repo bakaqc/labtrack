@@ -1,4 +1,6 @@
 $primary-color: #30c6b0;
+$tablet: 768px;
+$mobile: 480px;
 
 @mixin primary-color {
 	color: $primary-color !important;
@@ -63,6 +65,14 @@ $primary-color: #30c6b0;
 	max-width: 600px;
 	width: 100%;
 	margin: 0 auto;
+
+	@media (max-width: $tablet) {
+		min-width: 300px;
+	}
+
+	@media (max-width: $mobile) {
+		min-width: 200px;
+	}
 }
 
 .objectFit {
@@ -72,6 +82,14 @@ $primary-color: #30c6b0;
 	min-height: 50vh;
 	margin: 0 auto;
 	padding: 0 2rem;
+
+	@media (max-width: $tablet) {
+		max-width: 300px;
+	}
+
+	@media (max-width: $mobile) {
+		max-width: 200px;
+	}
 }
 
 #showCursor {
