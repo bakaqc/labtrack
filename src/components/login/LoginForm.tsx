@@ -118,7 +118,9 @@ const LoginForm = () => {
 												/>
 											</span>
 										</div>
-										{state.error && <p>{state.error}</p>}
+										{state.error && (
+											<p className="text-danger pt-3">{state.error}</p>
+										)}
 										<div className="mt-5">
 											<button className="w-50 p-2 d-block custom-btn">
 												Login
