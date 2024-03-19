@@ -7,8 +7,9 @@ declare type ProductInfo = {
 	image: string;
 };
 
-declare type AdminAccount = {
+declare type Account = {
 	id: number;
+	name: string;
 	username: string;
 	password: string;
 };

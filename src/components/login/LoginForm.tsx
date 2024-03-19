@@ -1,139 +1,82 @@
-import { useContext, useReducer } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
+import { SERVER_URL } from '../../api/config';
 import { useNavigate } from 'react-router-dom';
-import favicon from '../../../public/favicon.ico';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faEyeSlash, faEye } from '@fortawesome/free-solid-svg-icons';
-import './LoginForm.scss';
-import { UserContext } from '../UserContext';
-
-const initialState = {
-	passwordVisible: false,
-	username: '',
-	password: '',
-	error: '',
-};
-
-function reducer(state, action) {
-	switch (action.type) {
-		case 'setUsername':
-			return { ...state, username: action.payload };
-		case 'setPassword':
-			return { ...state, password: action.payload };
-		case 'togglePasswordVisibility':
-			return { ...state, passwordVisible: !state.passwordVisible };
-		case 'setError':
-			return { ...state, error: action.payload };
-		default:
-			throw new Error();
-	}
-}
 
 const LoginForm = () => {
-	const [state, dispatch] = useReducer(reducer, initialState);
-	const { setName } = useContext(UserContext);
+	const [username, setUsername] = useState<string>('');
+	const [password, setPassword] = useState<string>('');
 	const navigate = useNavigate();
 
-	const submitForm = async (event) => {
-		event.preventDefault();
+	const isValidated = () => {
+		if (username.trim().length == 0) return false;
+		if (password.trim().length == 0) return false;
 
-		try {
-			const response = await axios.get('http://localhost:5555/accounts');
-			const validAccount = response.data.find(
-				(account) =>
-					account.username.toLowerCase() === state.username.toLowerCase() &&
-					account.password === state.password,
-			);
-			if (validAccount) {
-				setName(validAccount.name);
-				navigate('/home');
-			} else {
-				dispatch({ type: 'setError', payload: 'Invalid username or password' });
+		const pattern: RegExp = /\b[qQ][eE]\d{6}\b/i;
+
+		return pattern.test(username);
+	};
+
+	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault();
+
+		if (isValidated()) {
+			const response = await axios.get<Account[]>(`${SERVER_URL}/accounts`);
+
+			if (response.status == 200) {
+				const account = response.data.find(
+					(acc) =>
+						acc.username == username.toLocaleUpperCase() &&
+						acc.password == password,
+				);
+
+				if (account) {
+					localStorage.setItem('account_name', account.name);
+					navigate('/products');
+				}
 			}
-		} catch (error) {
-			console.error('Failed to fetch accounts', error);
 		}
 	};
 
-	const handleUsernameChange = (event) => {
-		dispatch({ type: 'setUsername', payload: event.target.value });
-	};
-
-	const handlePasswordChange = (event) => {
-		dispatch({ type: 'setPassword', payload: event.target.value });
-	};
-
-	const togglePasswordVisibility = () => {
-		dispatch({ type: 'togglePasswordVisibility' });
-	};
-
 	return (
-		<div className="min-vh-100 d-flex align-items-center">
-			<div className="container">
-				<div className="row">
-					<div className="col-sm-7 mx-auto">
-						<div className="shadow-lg">
-							<div className="d-flex align-items-center">
-								<div className="d-none d-md-block d-lg-block">
-									<img src={favicon} className="objectFit" />
-								</div>
-								<div className="p-4" id="formPanel">
-									<div className="text-center mb-5">
-										<h1 className="customHeading h3 text-uppercase brand">
-											LabTrack
-										</h1>
-									</div>
-									<form onSubmit={submitForm}>
-										<div className="custom-form-group">
-											<label className="text-uppercase" htmlFor="username">
-												Username
-											</label>
-											<input
-												type="text"
-												id="username"
-												className="pb-1"
-												value={state.username}
-												onChange={handleUsernameChange}
-											/>
-											<span className="pb-1">
-												<FontAwesomeIcon icon={faUser} />
-											</span>
-										</div>
-										<div className="custom-form-group mt-3">
-											<label className="text-uppercase" htmlFor="password">
-												Password
-											</label>
-											<input
-												type={state.passwordVisible ? 'text' : 'password'}
-												id="password"
-												className="pb-1"
-												value={state.password}
-												onChange={handlePasswordChange}
-											/>
-											<span className="pb-1">
-												<FontAwesomeIcon
-													id="showCursor"
-													icon={state.passwordVisible ? faEye : faEyeSlash}
-													onClick={togglePasswordVisibility}
-												/>
-											</span>
-										</div>
-										{state.error && (
-											<p className="text-danger pt-3">{state.error}</p>
-										)}
-										<div className="mt-5">
-											<button className="w-50 p-2 d-block custom-btn">
-												Login
-											</button>
-										</div>
-									</form>
-								</div>
-							</div>
+		<>
+			<div className="container mt-5">
+				<div className="mx-5">
+					<h1 className="display-1 mb-4">Đăng nhập</h1>
+					<form onSubmit={handleSubmit}>
+						<div className="mb-3">
+							<label htmlFor="input-username" className="form-label">
+								Nhập mã số sinh viên
+							</label>
+							<input
+								type="text"
+								className="form-control"
+								id="input-username"
+								value={username}
+								onChange={(e) => setUsername(e.target.value.replace(/\s/g, ''))}
+								required
+							/>
 						</div>
-					</div>
+						<div className="mb-3">
+							<label htmlFor="input-password" className="form-label">
+								Nhập mật khẩu
+							</label>
+							<input
+								type="password"
+								className="form-control"
+								id="input-password"
+								value={password}
+								onChange={(e) => setPassword(e.target.value.replace(/\s/g, ''))}
+								required
+							/>
+						</div>
+						<button type="submit" className="btn btn-primary">
+							Đăng nhập
+						</button>
+					</form>
 				</div>
 			</div>
-		</div>
+		</>
 	);
 };
 
