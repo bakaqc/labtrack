@@ -1,11 +1,36 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser } from '@fortawesome/free-solid-svg-icons';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 
 const NavBarComponent = () => {
 	const accountName = localStorage.getItem('account_name');
+	const username_github = localStorage.getItem('username_github');
+	const [avatarUrl, setAvatarUrl] = useState('');
 	const navigate = useNavigate();
+	const location = useLocation();
+
+	useEffect(() => {
+		if (accountName && username_github) {
+			axios
+				.get(`https://api.github.com/users/${username_github}`, {
+
+				})
+				.then((response) => {
+					console.log('GitHub API response:', response);
+					setAvatarUrl(response.data.avatar_url);
+					console.log('Avatar URL:', response.data.avatar_url);
+				})
+				.catch((error) => {
+					console.error('Cannot fetch GitHub avatar', error);
+					Swal.fire({
+						title: 'Error',
+						text: 'Cannot fetch GitHub avatar. Please try again later.',
+						icon: 'error',
+					});
+				});
+		}
+	}, [accountName, username_github]);
 
 	const handleManageClick = () => {
 		if (accountName) {
@@ -20,6 +45,10 @@ const NavBarComponent = () => {
 		}
 	};
 
+	const activeStyle = {
+		color: '#bb2d3b',
+		fontWeight: 'bold',
+	};
 	return (
 		<>
 			<nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -36,17 +65,29 @@ const NavBarComponent = () => {
 					<div className="collapse navbar-collapse" id="navbar-id">
 						<ul className="navbar-nav me-auto mb-2 mb-lg-0">
 							<div className="nav-item">
-								<Link className="nav-link" to="/">
+								<Link
+									className="nav-link"
+									style={location.pathname === '/' ? activeStyle : {}}
+									to="/"
+								>
 									Danh sách sản phẩm
 								</Link>
 							</div>
 							<div className="nav-item">
-								<button className="nav-link" onClick={handleManageClick}>
+								<button
+									className="nav-link"
+									style={location.pathname === '/products' ? activeStyle : {}}
+									onClick={handleManageClick}
+								>
 									Quản lý sản phẩm
 								</button>
 							</div>
 							<div className="nav-item">
-								<Link className="nav-link" to="/about">
+								<Link
+									className="nav-link"
+									style={location.pathname === '/about' ? activeStyle : {}}
+									to="/about"
+								>
 									Giới thiệu
 								</Link>
 							</div>
@@ -60,7 +101,16 @@ const NavBarComponent = () => {
 									data-bs-toggle="dropdown"
 									aria-expanded="false"
 								>
-									<FontAwesomeIcon icon={faUser} /> {accountName}
+									<img
+										src={avatarUrl}
+										alt="avatar"
+										style={{
+											width: '30px',
+											borderRadius: '50%',
+											marginRight: '5px',
+										}}
+									/>{' '}
+									{accountName}
 								</a>
 								<div className="dropdown-menu p-1">
 									<div>
@@ -69,7 +119,7 @@ const NavBarComponent = () => {
 												localStorage.removeItem('account_name');
 												navigate('/');
 											}}
-											className="dropdown-item"
+											className="dropdown-item text-center"
 										>
 											Đăng xuất
 										</button>

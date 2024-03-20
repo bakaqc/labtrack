@@ -12,4 +12,5 @@ declare type Account = {
 	name: string;
 	username: string;
 	password: string;
+	username_github: string;
 };
