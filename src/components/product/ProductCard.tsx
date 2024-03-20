@@ -20,31 +20,45 @@ const ProductCard: React.FC<ProductProps> = ({
 	image,
 }) => {
 	return (
-		<div className="card mb-3 shadow" key={id}>
-			<img src={image} alt={name} className="card-img-top img-fluid" />
-			<div className="card-body bg-dark">
-				<div className="card-content text-white">
-					<h5 className="card-title">{name}</h5>
-					<p className="card-text">{description}</p>
-				</div>
-				<div className="text-center product-price">
-					<p className="card-text">
-						<small className="price text-white">
-							<span>Giá gốc: </span>
-							<span>{price}₫</span>
-						</small>
-					</p>
-					<p className="card-text">
-						<small className="text-danger fw-bold">
-							Ưu đãi: {currentPrice}₫
-						</small>
-					</p>
-					<Link to={`/detail-product/:${id}`} className="btn btn-danger">
-						Thông tin chi tiết
-					</Link>
+		<>
+			<style>{`
+				.card:hover {
+					transform: scale(1.05);
+					transition: transform 0.5s;
+				}
+			`}</style>
+			<div className="card mb-3 shadow border border-danger h-100" key={id}>
+				<img
+					src={image}
+					alt={name}
+					className="card-img-top img-fluid w-100 h-100 object-fit-cover"
+				/>
+				<div className="card-body">
+					<div className="card-content">
+						<h5 className="card-title">{name}</h5>
+						<p className="card-text">{description}</p>
+					</div>
+					<div className="text-center product-price mt-3">
+						<p className="card-text fs-5">
+							<small className="price fw-bold">
+								<span>Giá gốc: </span>
+								<del>
+									<span>{price}₫</span>
+								</del>
+							</small>
+						</p>
+						<h5 className="card-text mb-3 fs-4">
+							<small className="text-danger fw-bold">
+								Ưu đãi: {currentPrice}₫
+							</small>
+						</h5>
+						<Link to={`/detail-product/:${id}`} className="btn btn-danger">
+							Thông tin chi tiết
+						</Link>
+					</div>
 				</div>
 			</div>
-		</div>
+		</>
 	);
 };
 
