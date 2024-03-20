@@ -38,6 +38,7 @@ const LoginForm = () => {
 						icon: 'success',
 					}).then(() => {
 						localStorage.setItem('account_name', account.name);
+						localStorage.setItem('username_github', account.username_github);
 						navigate('/');
 					});
 				} else {
