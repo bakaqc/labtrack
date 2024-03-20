@@ -2,8 +2,8 @@ declare type ProductInfo = {
 	id: number;
 	name: string;
 	description: string;
-	price: string;
-	currentPrice: string;
+	price: number;
+	currentPrice: number;
 	image: string;
 };
 
