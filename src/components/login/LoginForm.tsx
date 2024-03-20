@@ -2,6 +2,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { SERVER_URL } from '../../api/config';
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const LoginForm = () => {
 	const [username, setUsername] = useState<string>('');
@@ -31,8 +32,22 @@ const LoginForm = () => {
 				);
 
 				if (account) {
-					localStorage.setItem('account_name', account.name);
-					navigate('/products');
+					Swal.fire({
+						title: "Đăng nhập thành công!",
+						text: "Chào mừng bạn đến với hệ thống quản lý labtop!",
+						icon: "success"
+					}).then(() => {
+						localStorage.setItem('account_name', account.name);
+						navigate('/products');
+					});
+				} else {
+					Swal.fire({
+						icon: 'error',
+						title: 'Đăng nhập thất bại',
+						text: 'Mã số sinh viên hoặc mật khẩu không chính xác!',
+					}).then(() => {
+						navigate('/login');
+					});
 				}
 			}
 		}
@@ -40,39 +55,47 @@ const LoginForm = () => {
 
 	return (
 		<>
-			<div className="container mt-5">
+			<div className="container mt-5 w-50">
 				<div className="mx-5">
-					<h1 className="display-1 mb-4">Đăng nhập</h1>
+					<h3 className="display-3 mb-4 text-center">Đăng nhập</h3>
 					<form onSubmit={handleSubmit}>
-						<div className="mb-3">
-							<label htmlFor="input-username" className="form-label">
+						<div className="d-flex flex-column align-items-center mb-3">
+							<label
+								htmlFor="input-username"
+								className="form-label w-75 text-start"
+							>
 								Nhập mã số sinh viên
 							</label>
 							<input
 								type="text"
-								className="form-control"
+								className="form-control w-75"
 								id="input-username"
 								value={username}
 								onChange={(e) => setUsername(e.target.value.replace(/\s/g, ''))}
 								required
 							/>
 						</div>
-						<div className="mb-3">
-							<label htmlFor="input-password" className="form-label">
+						<div className="d-flex flex-column align-items-center mb-3">
+							<label
+								htmlFor="input-password"
+								className="form-label w-75 text-start"
+							>
 								Nhập mật khẩu
 							</label>
 							<input
 								type="password"
-								className="form-control"
+								className="form-control w-75"
 								id="input-password"
 								value={password}
 								onChange={(e) => setPassword(e.target.value.replace(/\s/g, ''))}
 								required
 							/>
 						</div>
-						<button type="submit" className="btn btn-primary">
-							Đăng nhập
-						</button>
+						<div className="d-flex justify-content-center mt-4">
+							<button type="submit" className="btn btn-primary">
+								Đăng nhập
+							</button>
+						</div>
 					</form>
 				</div>
 			</div>
