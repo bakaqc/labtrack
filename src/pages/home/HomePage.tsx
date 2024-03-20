@@ -74,7 +74,7 @@ const HomePage: React.FC = () => {
 								type="button"
 								className="btn btn-primary mb-4 px-4 load-more"
 							>
-								Show more
+								Xem thêm
 							</button>
 						)}
 					</div>
