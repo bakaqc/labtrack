@@ -1,27 +1,19 @@
 import { Suspense, lazy, useEffect, useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
+import ProductTable from '../../components/products/ProductList';
 const NavBarComponent = lazy(
 	() => import('../../components/common/NavbarComponent'),
 );
-interface Product {
-	id: string;
-	name: string;
-	description: string;
-	price: number;
-	currentPrice: number;
-}
 
 const ProductListPage = () => {
-	const [products, setProducts] = useState<Product[]>([]);
+	const [products, setProducts] = useState<ProductInfo[]>([]);
 	const navigate = useNavigate();
 
 	useEffect(() => {
 		axios
-			.get<Product[]>('http://localhost:5555/products')
+			.get<ProductInfo[]>('http://localhost:5555/products')
 			.then((response) => {
 				setProducts(response.data);
 			})
@@ -32,15 +24,15 @@ const ProductListPage = () => {
 		navigate('/add-product');
 	};
 
-	const handleViewDetail = (id: string) => {
+	const handleViewDetail = (id: number) => {
 		navigate(`/detail-product/${id}`);
 	};
 
-	const handleEdit = (id: string) => {
+	const handleEdit = (id: number) => {
 		navigate(`/update-product/${id}`);
 	};
 
-	const handleDelete = (id: string) => {
+	const handleDelete = (id: number) => {
 		Swal.fire({
 			title: 'Bạn có chắc chắn?',
 			text: 'Xóa sản phẩm này!',
@@ -83,68 +75,12 @@ const ProductListPage = () => {
 						</button>
 					</div>
 					<div className="container d-flex flex-column align-items-center justify-content-center mt-2">
-						<table className="table align-middle mb-0 bg-white table-striped">
-							<thead className="bg-secondary">
-								<tr style={{ textAlign: 'center' }}>
-									<th style={{ width: '5%' }}>#</th>
-									<th style={{ width: '20%' }}>Name</th>
-									<th style={{ width: '45%' }}>Description</th>
-									<th style={{ width: '10%', textAlign: 'center' }}>Price</th>
-									<th style={{ width: '10%', textAlign: 'center' }}>
-										Current Price
-									</th>
-									<th style={{ width: '10%', textAlign: 'center' }}>Actions</th>
-								</tr>
-							</thead>
-							<tbody>
-								{products.map((product, index) => (
-									<tr key={product.id}>
-										<td style={{ textAlign: 'center' }}>{index + 1}</td>
-										<td>
-											<div className="d-flex align-items-center">
-												<p className="fw-bold mb-1">{product.name}</p>
-											</div>
-										</td>
-										<td>
-											<p className="fw-normal mb-1">{product.description}</p>
-										</td>
-										<td style={{ textAlign: 'center' }}>
-											<del>{product.price}đ</del>
-										</td>
-										<td style={{ textAlign: 'center' }}>
-											{product.currentPrice}đ
-										</td>
-										<td style={{ textAlign: 'center' }}>
-											<button
-												type="button"
-												className="btn btn-link btn-sm btn-rounded"
-												onClick={() => handleViewDetail(product.id)}
-											>
-												<FontAwesomeIcon icon={faEye} size="lg" color="green" />
-											</button>
-											<button
-												type="button"
-												className="btn btn-link btn-sm btn-rounded"
-												onClick={() => handleEdit(product.id)}
-											>
-												<FontAwesomeIcon
-													icon={faEdit}
-													size="lg"
-													color="orange"
-												/>
-											</button>
-											<button
-												type="button"
-												className="btn btn-link btn-sm btn-rounded"
-												onClick={() => handleDelete(product.id)}
-											>
-												<FontAwesomeIcon icon={faTrash} size="lg" color="red" />
-											</button>
-										</td>
-									</tr>
-								))}
-							</tbody>
-						</table>
+						<ProductTable
+							products={products}
+							handleViewDetail={handleViewDetail}
+							handleEdit={handleEdit}
+							handleDelete={handleDelete}
+						/>
 					</div>
 				</div>
 			</div>
