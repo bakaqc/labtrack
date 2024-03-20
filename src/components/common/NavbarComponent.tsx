@@ -11,8 +11,13 @@ const NavBarComponent = () => {
 					<div className="collapse navbar-collapse">
 						<ul className="navbar-nav me-auto mb-2 mb-lg-0">
 							<li className="nav-item">
-								<Link className="nav-link" to="/products">
+								<Link className="nav-link" to="/">
 									Danh sách sản phẩm
+								</Link>
+							</li>
+							<li className="nav-item">
+								<Link className="nav-link" to="/products">
+									Quản lí
 								</Link>
 							</li>
 							{accountName ? (
