@@ -7,21 +7,14 @@ import { useNavigate } from 'react-router-dom';
 const NavBarComponent = lazy(
 	() => import('../../components/common/NavbarComponent'),
 );
-interface Product {
-	id: string;
-	name: string;
-	description: string;
-	price: number;
-	currentPrice: number;
-}
 
 const ProductListPage = () => {
-	const [products, setProducts] = useState<Product[]>([]);
+	const [products, setProducts] = useState<ProductInfo[]>([]);
 	const navigate = useNavigate();
 
 	useEffect(() => {
 		axios
-			.get<Product[]>('http://localhost:5555/products')
+			.get<ProductInfo[]>('http://localhost:5555/products')
 			.then((response) => {
 				setProducts(response.data);
 			})
@@ -32,15 +25,15 @@ const ProductListPage = () => {
 		navigate('/add-product');
 	};
 
-	const handleViewDetail = (id: string) => {
+	const handleViewDetail = (id: number) => {
 		navigate(`/detail-product/${id}`);
 	};
 
-	const handleEdit = (id: string) => {
+	const handleEdit = (id: number) => {
 		navigate(`/update-product/${id}`);
 	};
 
-	const handleDelete = (id: string) => {
+	const handleDelete = (id: number) => {
 		Swal.fire({
 			title: 'Bạn có chắc chắn?',
 			text: 'Xóa sản phẩm này!',
