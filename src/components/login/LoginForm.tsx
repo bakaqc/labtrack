@@ -34,7 +34,7 @@ const LoginForm = () => {
 				if (account) {
 					Swal.fire({
 						title: "Đăng nhập thành công!",
-						text: "Chào mừng bạn đến với hệ thống quản lý labtop!",
+						text: "Chào mừng bạn đến với hệ thống quản lý laptop!",
 						icon: "success"
 					}).then(() => {
 						localStorage.setItem('account_name', account.name);
