@@ -43,6 +43,11 @@ const NavBarComponent = () => {
 									Quản lý sản phẩm
 								</button>
 							</div>
+							<div className="nav-item">
+								<Link className="nav-link" to="/about">
+									Giới thiệu
+								</Link>
+							</div>
 						</ul>
 						{accountName ? (
 							<div className="nav-item dropdown">
