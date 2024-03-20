@@ -1,5 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
 
 const NavBarComponent = () => {
 	const accountName = localStorage.getItem('account_name');
@@ -58,9 +60,9 @@ const NavBarComponent = () => {
 									data-bs-toggle="dropdown"
 									aria-expanded="false"
 								>
-									{accountName}
+									<FontAwesomeIcon icon={faUser} /> {accountName}
 								</a>
-								<div className="dropdown-menu">
+								<div className="dropdown-menu p-1">
 									<div>
 										<button
 											onClick={() => {

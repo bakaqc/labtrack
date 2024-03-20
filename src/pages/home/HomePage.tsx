@@ -1,7 +1,6 @@
 import React, { Suspense, lazy, useEffect, useState } from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './HomePage.css';
 
 const NavBarComponent = lazy(
 	() => import('../../components/common/NavbarComponent'),
