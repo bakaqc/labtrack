@@ -1,7 +1,7 @@
 import React, { Suspense, lazy, useEffect, useState } from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './HomePage.scss';
+import './HomePage.css';
 
 const NavBarComponent = lazy(
 	() => import('../../components/common/NavbarComponent'),
@@ -41,10 +41,10 @@ const HomePage: React.FC = () => {
 		<div className="home-page">
 			<Suspense fallback={<div>Loading...</div>}>
 				<NavBarComponent />
-				<div className="container">
-					<div className="product-list">
+				<div className="container mt-4">
+					<div className="product-list d-flex flex-wrap justify-content-around">
 						{products.slice(0, visible).map((product) => (
-							<div className="product-item" key={product.id}>
+							<div className="product-item d-flex flex-column" key={product.id}>
 								<ProductCard {...product} />
 							</div>
 						))}

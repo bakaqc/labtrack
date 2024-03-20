@@ -1,6 +1,6 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './ProductCard.scss';
+import './ProductCard.css';
 import { Link } from 'react-router-dom';
 
 interface ProductProps {

@@ -1,0 +1,44 @@
+.home-page {
+	background-color: white;
+	min-height: 100vh;
+}
+
+.container {
+	margin-top: 20px;
+}
+
+.container .product-list {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+}
+
+.container .product-list .product-item {
+	display: flex;
+	flex-direction: column;
+	flex: 0 0 calc(25% - 1em);
+	margin-right: 1em;
+}
+
+.container .product-list .product-item .card {
+	flex-grow: 1;
+}
+
+.container .product-list .product-item:last-child {
+	margin-right: 0;
+}
+
+.container .product-list::after {
+	content: '';
+	flex: 0 0 calc(75% - 3em);
+	visibility: hidden;
+}
+
+.container .load-more {
+	display: block;
+	width: 200px;
+	margin: 20px auto 0;
+	text-align: center;
+	line-height: 30px;
+	cursor: pointer;
+}
