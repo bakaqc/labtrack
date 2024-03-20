@@ -32,7 +32,6 @@ const NavBarComponent = () => {
 								<Link
 									className="nav-link"
 									onClick={handleManageClick}
-									// to={accountName ? '/products' : '/login'}
 								>
 									Quản lí
 								</Link>
