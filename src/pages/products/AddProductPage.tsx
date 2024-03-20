@@ -4,12 +4,18 @@ const NavBarComponent = lazy(
 	() => import('../../components/common/NavbarComponent'),
 );
 
+const AddProductForm = lazy(
+	() => import('../../components/product/AddProjectForm'),
+);
+
 const AddProductPage = () => {
 	return (
 		<>
 			<div className="vh-100">
 				<Suspense fallback={<div>Loading...</div>}>
 					<NavBarComponent />
+
+					<AddProductForm />
 				</Suspense>
 			</div>
 		</>
