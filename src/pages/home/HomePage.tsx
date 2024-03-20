@@ -1,18 +1,66 @@
-import { Suspense, lazy } from 'react';
+import React, { Suspense, lazy, useEffect, useState } from 'react';
+import axios from 'axios';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './HomePage.scss';
 
 const NavBarComponent = lazy(
 	() => import('../../components/common/NavbarComponent'),
 );
 
-const HomePage = () => {
+const ProductCard = lazy(() => import('../../components/product/ProductCard'));
+
+interface Product {
+	id: string;
+	name: string;
+	description: string;
+	price: string;
+	currentPrice: string;
+	image: string;
+}
+
+const HomePage: React.FC = () => {
+	const [products, setProducts] = useState<Product[]>([]);
+	const [visible, setVisible] = useState(8);
+
+	const loadMore = () => {
+		setVisible((prevValue) => prevValue + 8);
+	};
+
+	useEffect(() => {
+		axios
+			.get('http://localhost:5555/products')
+			.then((response) => {
+				setProducts(response.data);
+			})
+			.catch((error) => {
+				console.error('There was an error!', error);
+			});
+	}, []);
+
 	return (
-		<>
-			<div className="vh-100">
-				<Suspense fallback={<div>Loading...</div>}>
-					<NavBarComponent />
-				</Suspense>
-			</div>
-		</>
+		<div className="home-page">
+			<Suspense fallback={<div>Loading...</div>}>
+				<NavBarComponent />
+				<div className="container">
+					<div className="product-list">
+						{products.slice(0, visible).map((product) => (
+							<div className="product-item" key={product.id}>
+								<ProductCard {...product} />
+							</div>
+						))}
+					</div>
+					{visible < products.length && (
+						<button
+							onClick={loadMore}
+							type="button"
+							className="btn btn-primary load-more"
+						>
+							Show more
+						</button>
+					)}
+				</div>
+			</Suspense>
+		</div>
 	);
 };
 
