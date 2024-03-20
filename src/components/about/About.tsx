@@ -10,7 +10,7 @@ const About = () => {
 					<div className="col-md-4 d-flex flex-column align-items-center justify-content-center">
 						<img src={favicon} alt="LabTrack Logo" className="img-fluid" />
 					</div>
-					<div className="col-md-4 align-items-center justify-content-center">
+					<div className="col-md-6 align-items-center justify-content-center">
 						<p className="lead">
 							<strong>LabTrack</strong> là một dự án phát triển web độc đáo tập
 							trung vào việc quản lý và theo dõi laptop một cách hiệu quả trong
