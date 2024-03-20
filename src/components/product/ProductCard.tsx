@@ -33,15 +33,15 @@ const ProductCard: React.FC<ProductProps> = ({
 				<div className="product-price">
 					<div className="card-text price">
 						<span>Price: </span>
-						<span>{price}</span>
+						<span>{price}₫</span>
 					</div>
 					<div className="card-text current-price">
 						<span>Current Price: </span>
-						<span>{currentPrice}</span>
+						<span>{currentPrice}₫</span>
 					</div>
 				</div>
 				<div className="detail-button">
-					<Link to={`/product-detail-${id}`} className="btn btn-danger">
+					<Link to={`/detail-product/:${id}`} className="btn btn-danger">
 						View Details
 					</Link>
 				</div>
