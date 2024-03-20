@@ -1,8 +1,5 @@
 import { Suspense, lazy } from 'react';
 
-const NavBarComponent = lazy(
-	() => import('../../components/common/NavbarComponent'),
-);
 const LoginForm = lazy(() => import('../../components/login/LoginForm'));
 
 const LoginPage = () => {
@@ -12,8 +9,6 @@ const LoginPage = () => {
 		<>
 			<div className="vh-100">
 				<Suspense fallback={<div>Loading...</div>}>
-					<NavBarComponent />
-
 					{accountName ? (
 						<div className="d-flex align-items-center justify-content-center mt-3">
 							<div className="text-center">
