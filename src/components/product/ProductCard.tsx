@@ -22,11 +22,18 @@ const ProductCard: React.FC<ProductProps> = ({
 	return (
 		<>
 			<style>{`
-				.card:hover {
-					transform: scale(1.05);
-					transition: transform 0.5s;
-				}
-			`}</style>
+                .card:hover {
+                    transform: scale(1.05);
+                    transition: transform 0.5s;
+                }
+                .card-text {
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    display: -webkit-box;
+                    -webkit-line-clamp: 3;
+                    -webkit-box-orient: vertical;
+                }
+            `}</style>
 			<div className="card mb-3 shadow border border-danger h-100" key={id}>
 				<div
 					className="h-100"
