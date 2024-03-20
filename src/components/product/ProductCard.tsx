@@ -28,11 +28,16 @@ const ProductCard: React.FC<ProductProps> = ({
 				}
 			`}</style>
 			<div className="card mb-3 shadow border border-danger h-100" key={id}>
-				<img
-					src={image}
-					alt={name}
-					className="card-img-top img-fluid w-100 h-100 object-fit-cover"
-				/>
+				<div
+					className="h-100"
+					style={{ overflow: 'hidden', maxHeight: '200px' }}
+				>
+					<img
+						src={image}
+						alt={name}
+						className="card-img-top img-fluid w-100 h-100 object-fit-cover"
+					/>
+				</div>
 				<div className="card-body">
 					<div className="card-content">
 						<h5 className="card-title">{name}</h5>
@@ -52,7 +57,7 @@ const ProductCard: React.FC<ProductProps> = ({
 								Ưu đãi: {currentPrice}₫
 							</small>
 						</h5>
-						<Link to={`/detail-product/:${id}`} className="btn btn-danger">
+						<Link to={`/detail-product/${id}`} className="btn btn-danger">
 							Thông tin chi tiết
 						</Link>
 					</div>
