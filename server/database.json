@@ -1,6 +1,14 @@
 {
 	"products": [
 		{
+			"id": "1",
+			"name": " Laptop LG Gram 2023 14ZD90R-G.AX52A5",
+			"description": "Intel core i5-1340P, Ram 8GB, SSD 256GB, Màn Hình 14 inch WUXGA, Siêu mỏng, siêu nhẹ",
+			"price": "25.990.000",
+			"currentPrice": "20.990.000",
+			"image": "/imgs/laptops/laptop1.png"
+		},
+		{
 			"id": "2",
 			"name": "Laptop ACER Aspire 3 A315-59-51X8",
 			"description": "Intel Core i5-1235U, Ram 8GB, SSD 512GB, màn hình 15.6 inch FHD, Win 11 bản quyền, màu bạc, chính hãng, bảo hành 12 tháng",
@@ -73,6 +81,7 @@
 			"image": "/imgs/laptops/laptop10.png"
 		}
 	],
+
 	"accounts": [
 		{
 			"id": "1",
