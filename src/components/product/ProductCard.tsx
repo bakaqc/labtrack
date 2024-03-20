@@ -1,6 +1,5 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './ProductCard.css';
 import { Link } from 'react-router-dom';
 
 interface ProductProps {
@@ -21,32 +20,50 @@ const ProductCard: React.FC<ProductProps> = ({
 	image,
 }) => {
 	return (
-		<div className="card" key={id}>
-			<div className="card-top">
-				<img src={image} alt={name} className="card-img" />
-			</div>
-			<div className="card-body">
-				<div className="card-content">
-					<h4 className="card-title">{name}</h4>
-					<p className="card-text">{description}</p>
+		<>
+			<style>{`
+				.card:hover {
+					transform: scale(1.05);
+					transition: transform 0.5s;
+				}
+			`}</style>
+			<div className="card mb-3 shadow border border-danger h-100" key={id}>
+				<div
+					className="h-100"
+					style={{ overflow: 'hidden', maxHeight: '200px' }}
+				>
+					<img
+						src={image}
+						alt={name}
+						className="card-img-top img-fluid w-100 h-100 object-fit-cover"
+					/>
 				</div>
-				<div className="product-price">
-					<div className="card-text price">
-						<span>Price: </span>
-						<span>{price}₫</span>
+				<div className="card-body">
+					<div className="card-content">
+						<h5 className="card-title">{name}</h5>
+						<p className="card-text">{description}</p>
 					</div>
-					<div className="card-text current-price">
-						<span>Current Price: </span>
-						<span>{currentPrice}₫</span>
+					<div className="text-center product-price mt-3">
+						<p className="card-text fs-5">
+							<small className="price fw-bold">
+								<span>Giá gốc: </span>
+								<del>
+									<span>{price}₫</span>
+								</del>
+							</small>
+						</p>
+						<h5 className="card-text mb-3 fs-4">
+							<small className="text-danger fw-bold">
+								Ưu đãi: {currentPrice}₫
+							</small>
+						</h5>
+						<Link to={`/detail-product/${id}`} className="btn btn-danger">
+							Thông tin chi tiết
+						</Link>
 					</div>
 				</div>
-				<div className="detail-button">
-					<Link to={`/detail-product/:${id}`} className="btn btn-danger">
-						View Details
-					</Link>
-				</div>
 			</div>
-		</div>
+		</>
 	);
 };
 
