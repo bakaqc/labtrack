@@ -60,7 +60,7 @@ const NavBarComponent = () => {
 										<button
 											onClick={() => {
 												localStorage.removeItem('account_name');
-												window.location.reload();
+												navigate('/');
 											}}
 											className="dropdown-item"
 										>
