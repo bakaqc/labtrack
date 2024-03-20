@@ -6,10 +6,12 @@ import AddProductPage from '../pages/products/AddProductPage';
 import UpdateProductPage from '../pages/products/UpdateProductPage';
 import ProductDetailPage from '../pages/products/ProductDetailPage';
 import HomePage from '../pages/home/HomePage';
+import AboutPage from '../pages/about/AboutPage';
 
 export const router = createBrowserRouter([
 	{ path: '/', element: <HomePage /> },
 	{ path: '/login', element: <LoginPage /> },
+	{ path: '/about', element: <AboutPage /> },
 	{ path: '/products', element: <ProductListPage /> },
 	{ path: '/add-product', element: <AddProductPage /> },
 	{ path: '/update-product/:id', element: <UpdateProductPage /> },
