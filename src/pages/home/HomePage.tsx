@@ -1,7 +1,6 @@
 import React, { Suspense, lazy, useEffect, useState } from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './HomePage.css';
 
 const NavBarComponent = lazy(
 	() => import('../../components/common/NavbarComponent'),
@@ -42,22 +41,25 @@ const HomePage: React.FC = () => {
 			<Suspense fallback={<div>Loading...</div>}>
 				<NavBarComponent />
 				<div className="container mt-4">
-					<div className="product-list d-flex flex-wrap justify-content-around">
+					<h6 className="display-6 mb-5 text-center">Danh sách sản phẩm</h6>
+					<div className="row">
 						{products.slice(0, visible).map((product) => (
-							<div className="product-item d-flex flex-column" key={product.id}>
+							<div className="col-lg-3 col-md-4 col-sm-6 mb-4" key={product.id}>
 								<ProductCard {...product} />
 							</div>
 						))}
 					</div>
-					{visible < products.length && (
-						<button
-							onClick={loadMore}
-							type="button"
-							className="btn btn-primary load-more"
-						>
-							Show more
-						</button>
-					)}
+					<div className="text-center">
+						{visible < products.length && (
+							<button
+								onClick={loadMore}
+								type="button"
+								className="btn btn-primary load-more"
+							>
+								Show more
+							</button>
+						)}
+					</div>
 				</div>
 			</Suspense>
 		</div>

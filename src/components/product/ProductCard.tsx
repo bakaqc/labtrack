@@ -1,6 +1,5 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './ProductCard.css';
 import { Link } from 'react-router-dom';
 
 interface ProductProps {
@@ -21,28 +20,27 @@ const ProductCard: React.FC<ProductProps> = ({
 	image,
 }) => {
 	return (
-		<div className="card" key={id}>
-			<div className="card-top">
-				<img src={image} alt={name} className="card-img" />
-			</div>
-			<div className="card-body">
-				<div className="card-content">
-					<h4 className="card-title">{name}</h4>
+		<div className="card mb-3 shadow" key={id}>
+			<img src={image} alt={name} className="card-img-top img-fluid" />
+			<div className="card-body bg-dark">
+				<div className="card-content text-white">
+					<h5 className="card-title">{name}</h5>
 					<p className="card-text">{description}</p>
 				</div>
-				<div className="product-price">
-					<div className="card-text price">
-						<span>Price: </span>
-						<span>{price}₫</span>
-					</div>
-					<div className="card-text current-price">
-						<span>Current Price: </span>
-						<span>{currentPrice}₫</span>
-					</div>
-				</div>
-				<div className="detail-button">
+				<div className="text-center product-price">
+					<p className="card-text">
+						<small className="price text-white">
+							<span>Giá gốc: </span>
+							<span>{price}₫</span>
+						</small>
+					</p>
+					<p className="card-text">
+						<small className="text-danger fw-bold">
+							Ưu đãi: {currentPrice}₫
+						</small>
+					</p>
 					<Link to={`/detail-product/:${id}`} className="btn btn-danger">
-						View Details
+						Thông tin chi tiết
 					</Link>
 				</div>
 			</div>
