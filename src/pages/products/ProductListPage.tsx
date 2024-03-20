@@ -2,6 +2,7 @@ import { Suspense, lazy, useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 const NavBarComponent = lazy(
 	() => import('../../components/common/NavbarComponent'),
@@ -38,6 +39,31 @@ const ProductListPage = () => {
 	const handleEdit = (id: string) => {
 		navigate(`/update-product/${id}`);
 	};
+
+	const handleDelete = (id: string) => {
+		Swal.fire({
+			title: 'Bạn có chắc chắn?',
+			text: 'Xóa sản phẩm này!',
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Xóa!',
+			cancelButtonText: 'Hủy',
+			reverseButtons: true,
+		}).then((result) => {
+			if (result.isConfirmed) {
+				axios
+					.delete(`http://localhost:5555/products/${id}`)
+					.then(() => {
+						setProducts(products.filter((product) => product.id !== id));
+						Swal.fire('Xóa thành công!', 'Sản phẩm đã được xóa.', 'success');
+					})
+					.catch((error) => console.error('Error deleting product:', error));
+			}
+		});
+	};
+
 	return (
 		<>
 			<div className="vh-100">
@@ -45,20 +71,20 @@ const ProductListPage = () => {
 					<NavBarComponent />
 				</Suspense>
 
-				<div className="container d-flex flex-column align-items-center justify-content-center mt-5 manager">
+				<div className="container d-flex flex-column align-items-center justify-content-center mt-4 manager">
 					<h6 className="display-6">Quản lí sản phẩm</h6>
-					<div className="text-end w-100">
+					<div className="text-end w-100 p-2">
 						<button
 							type="button"
-							className="btn btn-primary mt-3"
+							className="btn btn-primary mt-2"
 							onClick={handleAddProduct}
 						>
 							+ Thêm sản phẩm
 						</button>
 					</div>
-					<div className="container d-flex flex-column align-items-center justify-content-center mt-5">
-						<table className="table align-middle mb-0 bg-white">
-							<thead className="bg-light">
+					<div className="container d-flex flex-column align-items-center justify-content-center mt-2">
+						<table className="table align-middle mb-0 bg-white table-striped">
+							<thead className="bg-secondary">
 								<tr style={{ textAlign: 'center' }}>
 									<th style={{ width: '5%' }}>#</th>
 									<th style={{ width: '20%' }}>Name</th>
@@ -94,20 +120,25 @@ const ProductListPage = () => {
 												className="btn btn-link btn-sm btn-rounded"
 												onClick={() => handleViewDetail(product.id)}
 											>
-												<FontAwesomeIcon icon={faEye} size="lg" />
+												<FontAwesomeIcon icon={faEye} size="lg" color="green" />
 											</button>
 											<button
 												type="button"
 												className="btn btn-link btn-sm btn-rounded"
 												onClick={() => handleEdit(product.id)}
 											>
-												<FontAwesomeIcon icon={faEdit} size="lg" />
+												<FontAwesomeIcon
+													icon={faEdit}
+													size="lg"
+													color="orange"
+												/>
 											</button>
 											<button
 												type="button"
 												className="btn btn-link btn-sm btn-rounded"
+												onClick={() => handleDelete(product.id)}
 											>
-												<FontAwesomeIcon icon={faTrash} size="lg" />
+												<FontAwesomeIcon icon={faTrash} size="lg" color="red" />
 											</button>
 										</td>
 									</tr>
