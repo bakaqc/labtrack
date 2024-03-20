@@ -1,8 +1,21 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const NavBarComponent = () => {
 	const accountName = localStorage.getItem('account_name');
-
+	const navigate = useNavigate();
+	const handleManageClick = () => {
+		if (accountName) {
+			navigate('/products');
+		} else {
+			Swal.fire({
+				title: 'Vui lòng đăng nhập để tiếp tục!',
+				icon: 'question',
+			}).then(() => {
+				navigate('/login');
+			});
+		}
+	};
 	return (
 		<>
 			<nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -16,7 +29,10 @@ const NavBarComponent = () => {
 								</Link>
 							</li>
 							<li className="nav-item">
-								<Link className="nav-link" to="/products">
+								<Link
+									className="nav-link"
+									onClick={handleManageClick}
+								>
 									Quản lí
 								</Link>
 							</li>
