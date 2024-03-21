@@ -41,7 +41,7 @@ To get a local copy up and running, follow these simple steps:
 ## Contributors:
 
 <a href="https://github.com/bakaqc/labtrack/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=bakaqc/labtrack" />
+    <img src="https://contrib.rocks/image?repo=bakaqc/labtrack" />
 </a>
 
 ## Licenses:
