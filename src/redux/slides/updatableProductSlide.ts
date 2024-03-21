@@ -10,26 +10,30 @@ const initialState: ProductInfo = {
 	image: '',
 };
 
-export const newProductSlide = createSlice({
-	name: 'newProduct',
+const updatableProductSlide = createSlice({
+	name: 'updatableProduct',
 	initialState,
 	reducers: {
-		changeName: (state, action: PayloadAction<string>) => {
+		changeId(state, action: PayloadAction<number>) {
+			state.id = action.payload;
+		},
+		changeName(state, action: PayloadAction<string>) {
 			state.name = action.payload;
 		},
-		changeDescription: (state, action: PayloadAction<string>) => {
+		changeDescription(state, action: PayloadAction<string>) {
 			state.description = action.payload;
 		},
-		changePrice: (state, action: PayloadAction<number>) => {
+		changePrice(state, action: PayloadAction<number>) {
 			if (action.payload > 0) state.price = action.payload;
 		},
-		changeCurrentPrice: (state, action: PayloadAction<number>) => {
+		changeCurrentPrice(state, action: PayloadAction<number>) {
 			if (action.payload > 0) state.currentPrice = action.payload;
 		},
-		changeImage: (state, action: PayloadAction<string>) => {
+		changeImage(state, action: PayloadAction<string>) {
 			state.image = action.payload;
 		},
-		reset: (state) => {
+		reset(state) {
+			state.id = 0;
 			state.name = '';
 			state.description = '';
 			state.price = 0;
@@ -40,12 +44,13 @@ export const newProductSlide = createSlice({
 });
 
 export const {
+	changeId,
 	changeName,
 	changeDescription,
 	changePrice,
 	changeCurrentPrice,
 	changeImage,
 	reset,
-} = newProductSlide.actions;
+} = updatableProductSlide.actions;
 
-export default newProductSlide.reducer;
+export default updatableProductSlide.reducer;

@@ -5,7 +5,7 @@ const NavBarComponent = lazy(
 );
 
 const AddProductForm = lazy(
-	() => import('../../components/product/AddProjectForm'),
+	() => import('../../components/product/AddProductForm'),
 );
 
 const AddProductPage = () => {

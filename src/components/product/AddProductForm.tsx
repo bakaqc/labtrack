@@ -14,15 +14,51 @@ import {
 	reset,
 } from '../../redux/slides/newProductSlide';
 
-export const AddProjectForm = () => {
+export const AddProductForm = () => {
 	const dispatch = useDispatch();
 	const { name, description, price, currentPrice, image } = useSelector(
 		(state: RootState) => state.newProduct,
 	);
 	const navigate = useNavigate();
 
+	const isValidated = (): string => {
+		if (name.trim().length < 0) {
+			return 'Tên sản phẩm không được để trống!';
+		}
+
+		if (description.trim().length < 0) {
+			return 'Mô tả không được để trống!';
+		}
+
+		if (price == 0) {
+			return 'Giá gốc phải lớn hơn 0!';
+		}
+
+		if (currentPrice == 0) {
+			return 'Ưu đãi phải lớn hơn 0!';
+		}
+
+		if (currentPrice >= price) {
+			console.log(price, currentPrice);
+			return 'Ưu đãi phải nhỏ hơn giá gốc!';
+		}
+
+		return '';
+	};
+
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
+
+		const message = isValidated();
+
+		if (message.length > 0) {
+			Swal.fire({
+				title: 'Lỗi!',
+				text: message,
+				icon: 'error',
+			});
+			return;
+		}
 
 		const response = await axios.post(`${SERVER_URL}/products`, {
 			name,
@@ -33,11 +69,13 @@ export const AddProjectForm = () => {
 		});
 
 		if (response.status == 201) {
-			Swal.fire({
+			const response = Swal.fire({
 				title: 'Thành công!',
 				text: 'Thêm sản phẩm thành công!',
 				icon: 'success',
-			}).then(() => {
+			});
+
+			response.then(() => {
 				dispatch(reset());
 				navigate('/products');
 			});
@@ -57,9 +95,9 @@ export const AddProjectForm = () => {
 
 	return (
 		<>
-			<div className="container mt-5 w-50">
+			<div className="container mt-5 w-50 shadow-lg py-5">
 				<div className="mx-5">
-					<h3 className="display-3 mb-4 text-center">Thêm sản phẩm</h3>
+					<h6 className="display-6 mb-4 text-center">Thêm sản phẩm</h6>
 
 					<form onSubmit={handleSubmit}>
 						<div className="d-flex flex-column align-items-center mb-3">
@@ -74,6 +112,7 @@ export const AddProjectForm = () => {
 								className="form-control w-75"
 								id="input-name"
 								value={name}
+								autoComplete="off"
 								onChange={(e) =>
 									dispatch(changeName(e.target.value.replace(/\s/g, '')))
 								}
@@ -92,6 +131,7 @@ export const AddProjectForm = () => {
 								className="form-control w-75"
 								id="input-price"
 								value={price}
+								autoComplete="off"
 								onChange={(e) =>
 									dispatch(changePrice(e.target.value as unknown as number))
 								}
@@ -110,6 +150,7 @@ export const AddProjectForm = () => {
 								className="form-control w-75"
 								id="input-currentPrice"
 								value={currentPrice}
+								autoComplete="off"
 								onChange={(e) =>
 									dispatch(
 										changeCurrentPrice(e.target.value as unknown as number),
@@ -129,6 +170,7 @@ export const AddProjectForm = () => {
 								className="form-control w-75"
 								id="input-description"
 								value={description}
+								autoComplete="off"
 								onChange={(e) =>
 									dispatch(changeDescription(e.target.value.trim()))
 								}
@@ -147,9 +189,11 @@ export const AddProjectForm = () => {
 								className="form-control w-75"
 								id="input-image"
 								accept="image/*"
+								autoComplete="off"
 								onChange={handleImageChange}
 								required
 							/>
+							{image && <img src={image} alt="preview" className="w-75 mt-3" />}
 						</div>
 						<div className="d-flex justify-content-center mt-4">
 							<button type="submit" className="btn btn-primary">
@@ -163,4 +207,4 @@ export const AddProjectForm = () => {
 	);
 };
 
-export default AddProjectForm;
+export default AddProductForm;
