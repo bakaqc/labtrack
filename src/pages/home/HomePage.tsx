@@ -1,6 +1,6 @@
 import React, { Suspense, lazy, useEffect, useState } from 'react';
 import axios from 'axios';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import { SERVER_URL } from '../../api/config';
 
 const NavBarComponent = lazy(
 	() => import('../../components/common/NavbarComponent'),
@@ -43,7 +43,7 @@ const HomePage: React.FC = () => {
 
 	useEffect(() => {
 		axios
-			.get('http://localhost:5555/products')
+			.get(`${SERVER_URL}/products`)
 			.then((response) => {
 				setProducts(response.data);
 			})

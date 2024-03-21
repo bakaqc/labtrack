@@ -4,6 +4,7 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { SERVER_URL } from '../../api/config';
 
 const ProductListTable = () => {
 	const [products, setProducts] = useState<ProductInfo[]>([]);
@@ -11,7 +12,7 @@ const ProductListTable = () => {
 
 	useEffect(() => {
 		axios
-			.get<ProductInfo[]>('http://localhost:5555/products')
+			.get<ProductInfo[]>(`${SERVER_URL}/products`)
 			.then((response) => {
 				setProducts(response.data);
 			})
