@@ -43,7 +43,7 @@ const HomePage: React.FC = () => {
 
 	useEffect(() => {
 		axios
-			.get('http://localhost:5555/products')
+			.get('${SERVER_URL}/products')
 			.then((response) => {
 				setProducts(response.data);
 			})

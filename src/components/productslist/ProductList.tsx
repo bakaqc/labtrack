@@ -11,7 +11,7 @@ const ProductListTable = () => {
 
 	useEffect(() => {
 		axios
-			.get<ProductInfo[]>('http://localhost:5555/products')
+			.get<ProductInfo[]>('${SERVER_URL}/products')
 			.then((response) => {
 				setProducts(response.data);
 			})
