@@ -43,7 +43,9 @@ const ProductCard: React.FC<ProductProps> = ({
 		transform: isHovered ? 'scale(1.05)' : 'scale(1)',
 		transition: 'transform 0.5s',
 	};
-
+	const formatPrice = (price: number) => {
+		return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.') + 'đ';
+	};
 	return (
 		<div
 			className="card mb-3 shadow border border-danger h-100"
@@ -73,13 +75,13 @@ const ProductCard: React.FC<ProductProps> = ({
 						<small className="price fw-bold">
 							<span>Giá gốc: </span>
 							<del>
-								<span>{price}₫</span>
+							<span>{formatPrice(Number(price))}</span>
 							</del>
 						</small>
 					</p>
 					<h5 className="card-text mb-3 fs-4">
 						<small className="text-danger fw-bold">
-							Ưu đãi: {currentPrice}₫
+							Ưu đãi: {formatPrice(Number(currentPrice))}
 						</small>
 					</h5>
 					<Link to={`/detail-product/${id}`} className="btn btn-danger">
