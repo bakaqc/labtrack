@@ -60,52 +60,52 @@ const LoginForm = () => {
 				className="d-flex align-items-center justify-content-center"
 				style={{ height: '100vh', overflow: 'hidden' }}
 			>
-				<div className="container w-50 shadow-lg p-5">
-					<div className="mx-5">
-						<h6 className="display-6 mb-5 text-center">Đăng nhập LabTrack</h6>
-						<form onSubmit={handleSubmit}>
-							<div className="d-flex flex-column align-items-center mb-3">
-								<label
-									htmlFor="input-username"
-									className="form-label w-50 text-start"
-								>
-									Nhập mã số sinh viên
-								</label>
-								<input
-									type="text"
-									className="form-control w-50 mb-2"
-									id="input-username"
-									value={username}
-									onChange={(e) =>
-										setUsername(e.target.value.replace(/\s/g, ''))
-									}
-									required
-								/>
+				<div className="container">
+					<div className="row justify-content-center">
+						<div className="col-12 col-md-8 col-lg-6 shadow-lg p-5">
+							<div className="mx-5">
+								<h6 className="display-6 mb-5 text-center">
+									Đăng nhập LabTrack
+								</h6>
+								<form onSubmit={handleSubmit}>
+									<div className="mb-3">
+										<label htmlFor="input-username" className="form-label">
+											Nhập mã số sinh viên
+										</label>
+										<input
+											type="text"
+											className="form-control"
+											id="input-username"
+											value={username}
+											onChange={(e) =>
+												setUsername(e.target.value.replace(/\s/g, ''))
+											}
+											required
+										/>
+									</div>
+									<div className="mb-3">
+										<label htmlFor="input-password" className="form-label">
+											Nhập mật khẩu
+										</label>
+										<input
+											type="password"
+											className="form-control"
+											id="input-password"
+											value={password}
+											onChange={(e) =>
+												setPassword(e.target.value.replace(/\s/g, ''))
+											}
+											required
+										/>
+									</div>
+									<div className="d-flex justify-content-center mt-4">
+										<button type="submit" className="btn btn-primary w-100">
+											Đăng nhập
+										</button>
+									</div>
+								</form>
 							</div>
-							<div className="d-flex flex-column align-items-center mb-3">
-								<label
-									htmlFor="input-password"
-									className="form-label w-50 text-start"
-								>
-									Nhập mật khẩu
-								</label>
-								<input
-									type="password"
-									className="form-control w-50 mb-2"
-									id="input-password"
-									value={password}
-									onChange={(e) =>
-										setPassword(e.target.value.replace(/\s/g, ''))
-									}
-									required
-								/>
-							</div>
-							<div className="d-flex justify-content-center mt-4">
-								<button type="submit" className="btn btn-primary w-50">
-									Đăng nhập
-								</button>
-							</div>
-						</form>
+						</div>
 					</div>
 				</div>
 			</div>
