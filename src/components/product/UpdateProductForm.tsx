@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -55,7 +56,7 @@ export const UpdateProductForm = (props: UpdateProductFormProps) => {
 		};
 
 		fetchProduct();
-	});
+	}, []);
 
 	const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const file = e.target.files![0];

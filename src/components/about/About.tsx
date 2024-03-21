@@ -1,4 +1,3 @@
-import React from 'react';
 import favicon from '../../../public/favicon.ico';
 
 const About = () => {
