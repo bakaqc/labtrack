@@ -39,7 +39,7 @@ const LoginForm = () => {
 					}).then(() => {
 						localStorage.setItem('account_name', account.name);
 						localStorage.setItem('username_github', account.username_github);
-						navigate('/');
+						navigate('/labtrack/');
 					});
 				} else {
 					Swal.fire({
@@ -47,7 +47,7 @@ const LoginForm = () => {
 						title: 'Đăng nhập thất bại',
 						text: 'Mã số sinh viên hoặc mật khẩu không chính xác!',
 					}).then(() => {
-						navigate('/login');
+						navigate('/labtrack/login');
 					});
 				}
 			}

@@ -75,7 +75,7 @@ const ProductCard: React.FC<ProductProps> = ({
 						<small className="price fw-bold">
 							<span>Giá gốc: </span>
 							<del>
-							<span>{formatPrice(Number(price))}</span>
+								<span>{formatPrice(Number(price))}</span>
 							</del>
 						</small>
 					</p>
@@ -84,7 +84,10 @@ const ProductCard: React.FC<ProductProps> = ({
 							Ưu đãi: {formatPrice(Number(currentPrice))}
 						</small>
 					</h5>
-					<Link to={`/detail-product/${id}`} className="btn btn-danger">
+					<Link
+						to={`/labtrack/detail-product/${id}`}
+						className="btn btn-danger"
+					>
 						Thông tin chi tiết
 					</Link>
 				</div>

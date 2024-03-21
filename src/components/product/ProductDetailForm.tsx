@@ -28,7 +28,7 @@ const ProductDetailForm = (props: ProductDetailFormProps) => {
   }
 
 	const handleBackClick = () => {
-    navigate('/products');
+    navigate('/labtrack/products');
   }
 
 	const formatPrice = (price: number) => {

@@ -18,7 +18,7 @@ const ProductDetailPage = lazy(
 
 export const router = createBrowserRouter([
 	{
-		path: '/',
+		path: '/labtrack/',
 		element: (
 			<Suspense fallback={<LoadingComponent />}>
 				<HomePage />
@@ -26,7 +26,7 @@ export const router = createBrowserRouter([
 		),
 	},
 	{
-		path: '/login',
+		path: '/labtrack/login',
 		element: (
 			<Suspense fallback={<LoadingComponent />}>
 				<LoginPage />
@@ -34,7 +34,7 @@ export const router = createBrowserRouter([
 		),
 	},
 	{
-		path: '/about',
+		path: '/labtrack/about',
 		element: (
 			<Suspense fallback={<LoadingComponent />}>
 				<AboutPage />
@@ -42,7 +42,7 @@ export const router = createBrowserRouter([
 		),
 	},
 	{
-		path: '/products',
+		path: '/labtrack/products',
 		element: (
 			<Suspense fallback={<LoadingComponent />}>
 				<ProductListPage />
@@ -50,7 +50,7 @@ export const router = createBrowserRouter([
 		),
 	},
 	{
-		path: '/add-product',
+		path: '/labtrack/add-product',
 		element: (
 			<Suspense fallback={<LoadingComponent />}>
 				<AddProductPage />
@@ -58,7 +58,7 @@ export const router = createBrowserRouter([
 		),
 	},
 	{
-		path: '/update-product/:id',
+		path: '/labtrack/update-product/:id',
 		element: (
 			<Suspense fallback={<LoadingComponent />}>
 				<UpdateProductPage />
@@ -66,12 +66,12 @@ export const router = createBrowserRouter([
 		),
 	},
 	{
-		path: '/detail-product/:id',
+		path: '/labtrack/detail-product/:id',
 		element: (
 			<Suspense fallback={<LoadingComponent />}>
 				<ProductDetailPage />
 			</Suspense>
 		),
 	},
-	{ path: '*', element: <Error404 /> },
+	{ path: '/labtrack/*', element: <Error404 /> },
 ]);

@@ -20,15 +20,15 @@ const ProductListTable = () => {
 	}, []);
 
 	const handleAddProduct = () => {
-		navigate('/add-product');
+		navigate('/labtrack/add-product');
 	};
 
 	const handleViewDetail = (id: number) => {
-		navigate(`/detail-product/${id}`);
+		navigate(`/labtrack/detail-product/${id}`);
 	};
 
 	const handleEdit = (id: number) => {
-		navigate(`/update-product/${id}`);
+		navigate(`/labtrack/update-product/${id}`);
 	};
 
 	const handleDelete = (id: number) => {

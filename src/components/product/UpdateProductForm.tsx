@@ -49,7 +49,7 @@ export const UpdateProductForm = (props: UpdateProductFormProps) => {
 						icon: 'error',
 					}).then(() => {
 						dispatch(reset());
-						navigate('/products');
+						navigate('/labtrack/products');
 					});
 				}
 			}
@@ -119,13 +119,13 @@ export const UpdateProductForm = (props: UpdateProductFormProps) => {
 		if (response.status == 200) {
 			const response = Swal.fire({
 				title: 'Thành công!',
-				text: 'Thêm sản phẩm thành công!',
+				text: 'Cập nhật sản phẩm thành công!',
 				icon: 'success',
 			});
 
 			response.then(() => {
 				dispatch(reset());
-				navigate(`/update-product/${id}`);
+				navigate(`/labtrack/detail-product/${id}`);
 			});
 		}
 	};
