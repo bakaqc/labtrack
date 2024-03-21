@@ -52,7 +52,7 @@ const ProductCard: React.FC<ProductProps> = ({
 			onMouseEnter={() => setIsHovered(true)}
 			onMouseLeave={() => setIsHovered(false)}
 		>
-			<div className="h-100" style={{ overflow: 'hidden', maxHeight: '200px' }}>
+			<div className="h-100" style={{ overflow: 'hidden', maxHeight: '220px' }}>
 				<img
 					src={image}
 					alt={name}
