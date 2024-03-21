@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
@@ -6,20 +6,67 @@ import axios from 'axios';
 import { SERVER_URL } from '../../api/config';
 import { RootState } from '../../redux/store';
 import {
-	changeCurrentPrice,
-	changeDescription,
+	changeId,
 	changeName,
+	changeDescription,
 	changePrice,
+	changeCurrentPrice,
 	changeImage,
 	reset,
-} from '../../redux/slides/newProductSlide';
+} from '../../redux/slides/updatableProductSlide';
 
-export const AddProductForm = () => {
+interface UpdateProductFormProps {
+	id: number;
+}
+
+export const UpdateProductForm = (props: UpdateProductFormProps) => {
 	const dispatch = useDispatch();
-	const { name, description, price, currentPrice, image } = useSelector(
-		(state: RootState) => state.newProduct,
+	const { id, name, description, price, currentPrice, image } = useSelector(
+		(state: RootState) => state.updateableProduct,
 	);
+
 	const navigate = useNavigate();
+
+	useEffect(() => {
+		const fetchProduct = async () => {
+			try {
+				const response = await axios.get(`${SERVER_URL}/products/${props.id}`);
+
+				if (response.status == 200) {
+					dispatch(changeId(response.data.id));
+					dispatch(changeName(response.data.name));
+					dispatch(changeDescription(response.data.description));
+					dispatch(changePrice(response.data.price));
+					dispatch(changeCurrentPrice(response.data.currentPrice));
+					dispatch(changeImage(response.data.image));
+				}
+			} catch (error) {
+				if (axios.isAxiosError(error) && error.response?.status == 404) {
+					Swal.fire({
+						title: 'Lỗi!',
+						text: 'Không tìm thấy sản phẩm!',
+						icon: 'error',
+					}).then(() => {
+						dispatch(reset());
+						navigate('/products');
+					});
+				}
+			}
+		};
+
+		fetchProduct();
+	});
+
+	const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const file = e.target.files![0];
+		const reader = new FileReader();
+
+		reader.onloadend = () => {
+			dispatch(changeImage(reader.result as string));
+		};
+
+		reader.readAsDataURL(file);
+	};
 
 	const isValidated = (): string => {
 		if (name.trim().length < 0) {
@@ -60,7 +107,7 @@ export const AddProductForm = () => {
 			return;
 		}
 
-		const response = await axios.post(`${SERVER_URL}/products`, {
+		const response = await axios.put(`${SERVER_URL}/products/${id}`, {
 			name,
 			description,
 			price,
@@ -68,7 +115,7 @@ export const AddProductForm = () => {
 			image,
 		});
 
-		if (response.status == 201) {
+		if (response.status == 200) {
 			const response = Swal.fire({
 				title: 'Thành công!',
 				text: 'Thêm sản phẩm thành công!',
@@ -77,27 +124,16 @@ export const AddProductForm = () => {
 
 			response.then(() => {
 				dispatch(reset());
-				navigate('/products');
+				navigate(`/update-product/${id}`);
 			});
 		}
-	};
-
-	const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		const file = e.target.files![0];
-		const reader = new FileReader();
-
-		reader.onloadend = () => {
-			dispatch(changeImage(reader.result as string));
-		};
-
-		reader.readAsDataURL(file);
 	};
 
 	return (
 		<>
 			<div className="container mt-5 w-50 shadow-lg py-5">
 				<div className="mx-5">
-					<h6 className="display-6 mb-4 text-center">Thêm sản phẩm</h6>
+					<h6 className="display-6 mb-4 text-center">Cập nhật sản phẩm</h6>
 
 					<form onSubmit={handleSubmit}>
 						<div className="d-flex flex-column align-items-center mb-3">
@@ -197,7 +233,7 @@ export const AddProductForm = () => {
 						</div>
 						<div className="d-flex justify-content-center mt-4">
 							<button type="submit" className="btn btn-primary">
-								Thêm sản phẩm
+								Cập nhật sản phẩm
 							</button>
 						</div>
 					</form>
@@ -207,4 +243,4 @@ export const AddProductForm = () => {
 	);
 };
 
-export default AddProductForm;
+export default UpdateProductForm;
