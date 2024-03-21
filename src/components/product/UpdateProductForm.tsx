@@ -233,7 +233,15 @@ export const UpdateProductForm = (props: UpdateProductFormProps) => {
 							{image && <img src={image} alt="preview" className="w-75 mt-3" />}
 						</div>
 						<div className="d-flex justify-content-center mt-4">
-							<button type="submit" className="btn btn-primary">
+							<button
+								type="button"
+								className="btn btn-secondary col-3"
+								style={{ marginRight: '20px' }}
+								onClick={() => navigate(-1)}
+							>
+								Quay lại
+							</button>
+							<button type="submit" className="btn btn-primary col-3">
 								Cập nhật sản phẩm
 							</button>
 						</div>
