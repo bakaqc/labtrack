@@ -15,7 +15,7 @@
 
 ## Document
 
-- Assignments: [Click here!!!](Assignment.pdf)
+- Assignment: [Click here!!!](Assignment.pdf)
 
 ## Getting Started
 
