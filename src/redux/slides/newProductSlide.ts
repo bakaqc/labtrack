@@ -21,10 +21,10 @@ export const newProductSlide = createSlice({
 			state.description = action.payload;
 		},
 		changePrice: (state, action: PayloadAction<number>) => {
-			state.price = action.payload;
+			if (action.payload > 0) state.price = action.payload;
 		},
 		changeCurrentPrice: (state, action: PayloadAction<number>) => {
-			state.currentPrice = action.payload;
+			if (action.payload > 0) state.currentPrice = action.payload;
 		},
 		changeImage: (state, action: PayloadAction<string>) => {
 			state.image = action.payload;
