@@ -53,6 +53,9 @@ const ProductListTable = () => {
 			}
 		});
 	};
+	const formatPrice = (price: number) => {
+		return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.') + 'đ';
+	};
 	return (
 		<div className="container d-flex flex-column align-items-center justify-content-center mt-4 manager">
 			<h6 className="display-6">Quản lí sản phẩm</h6>
@@ -65,7 +68,7 @@ const ProductListTable = () => {
 					+ Thêm sản phẩm
 				</button>
 			</div>
-			<div className="container d-flex flex-column align-items-center justify-content-center mt-2">
+			<div className="container d-flex flex-column align-items-center justify-content-center mt-2 mb-5 shadow-lg">
 				<table className="table align-middle mb-0 bg-white table-striped">
 					<thead className="bg-secondary">
 						<tr style={{ textAlign: 'center' }}>
@@ -92,9 +95,11 @@ const ProductListTable = () => {
 									<p className="fw-normal mb-1">{product.description}</p>
 								</td>
 								<td style={{ textAlign: 'center' }}>
-									<del>{product.price}đ</del>
+									<del>{formatPrice(product.price)}</del>
 								</td>
-								<td style={{ textAlign: 'center' }}>{product.currentPrice}đ</td>
+								<td style={{ textAlign: 'center' }}>
+									{formatPrice(product.currentPrice)}
+								</td>
 								<td style={{ textAlign: 'center' }}>
 									<button
 										type="button"
