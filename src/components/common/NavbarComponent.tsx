@@ -34,13 +34,13 @@ const NavBarComponent = () => {
 
 	const handleManageClick = () => {
 		if (accountName) {
-			navigate('/products');
+			navigate('/labtrack/products');
 		} else {
 			Swal.fire({
 				title: 'Vui lòng đăng nhập để tiếp tục!',
 				icon: 'question',
 			}).then(() => {
-				navigate('/login');
+				navigate('/labtrack/login');
 			});
 		}
 	};
@@ -67,8 +67,8 @@ const NavBarComponent = () => {
 							<div className="nav-item">
 								<Link
 									className="nav-link"
-									style={location.pathname === '/' ? activeStyle : {}}
-									to="/"
+									style={location.pathname === '/labtrack/' ? activeStyle : {}}
+									to="/labtrack/"
 								>
 									Danh sách sản phẩm
 								</Link>
@@ -76,7 +76,7 @@ const NavBarComponent = () => {
 							<div className="nav-item">
 								<button
 									className="nav-link"
-									style={location.pathname === '/products' ? activeStyle : {}}
+									style={location.pathname === '/labtrack/products' ? activeStyle : {}}
 									onClick={handleManageClick}
 								>
 									Quản lý sản phẩm
@@ -85,8 +85,8 @@ const NavBarComponent = () => {
 							<div className="nav-item">
 								<Link
 									className="nav-link"
-									style={location.pathname === '/about' ? activeStyle : {}}
-									to="/about"
+									style={location.pathname === '/labtrack/about' ? activeStyle : {}}
+									to="/labtrack/about"
 								>
 									Giới thiệu
 								</Link>
@@ -117,7 +117,7 @@ const NavBarComponent = () => {
 										<button
 											onClick={() => {
 												localStorage.removeItem('account_name');
-												navigate('/');
+												navigate('/labtrack/');
 											}}
 											className="dropdown-item text-center"
 										>
@@ -128,7 +128,7 @@ const NavBarComponent = () => {
 							</div>
 						) : (
 							<div className="nav-item">
-								<Link className="nav-link" to="/login">
+								<Link className="nav-link" to="/labtrack/login">
 									Đăng nhập
 								</Link>
 							</div>

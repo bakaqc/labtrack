@@ -77,7 +77,7 @@ export const AddProductForm = () => {
 
 			response.then(() => {
 				dispatch(reset());
-				navigate('/products');
+				navigate('/labtrack/products');
 			});
 		}
 	};
