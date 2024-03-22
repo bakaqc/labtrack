@@ -87,7 +87,7 @@ const ProductDetailForm = (props: ProductDetailFormProps) => {
 							Mô tả sản phẩm:
 						</p>
 						<p className="h5 d-flex flex-column align-items-center mb-3">
-							- {product.description}
+							{product.description}
 						</p>
 						<button
 							onClick={() => navigate(-1)}
