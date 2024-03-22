@@ -130,126 +130,117 @@ export const UpdateProductForm = (props: UpdateProductFormProps) => {
 		}
 	};
 
+
 	return (
 		<>
-			<div className="container mt-5 w-50 shadow-lg py-5">
+			<div className="container mt-5 shadow-lg py-5">
 				<div className="mx-5">
 					<h6 className="display-6 mb-4 text-center">Cập nhật sản phẩm</h6>
 
 					<form onSubmit={handleSubmit}>
-						<div className="d-flex flex-column align-items-center mb-3">
-							<label
-								htmlFor="input-name"
-								className="form-label w-75 text-start"
-							>
-								Tên sản phẩm
-							</label>
-							<input
-								type="text"
-								className="form-control w-75"
-								id="input-name"
-								value={name}
-								autoComplete="off"
-								onChange={(e) =>
-									dispatch(changeName(e.target.value.replace(/\s/g, '')))
-								}
-								required
-							/>
-						</div>
-						<div className="d-flex flex-column align-items-center mb-3">
-							<label
-								htmlFor="input-price"
-								className="form-label w-75 text-start"
-							>
-								Giá gốc
-							</label>
-							<input
-								type="number"
-								className="form-control w-75"
-								id="input-price"
-								value={price}
-								autoComplete="off"
-								onChange={(e) =>
-									dispatch(changePrice(e.target.value as unknown as number))
-								}
-								required
-							/>
-						</div>
-						<div className="d-flex flex-column align-items-center mb-3">
-							<label
-								htmlFor="input-currentPrice"
-								className="form-label w-75 text-start"
-							>
-								Ưu đãi
-							</label>
-							<input
-								type="number"
-								className="form-control w-75"
-								id="input-currentPrice"
-								value={currentPrice}
-								autoComplete="off"
-								onChange={(e) =>
-									dispatch(
-										changeCurrentPrice(e.target.value as unknown as number),
-									)
-								}
-								required
-							/>
-						</div>
-						<div className="d-flex flex-column align-items-center mb-3">
-							<label
-								htmlFor="input-description"
-								className="form-label w-75 text-start"
-							>
-								Mô tả
-							</label>
-							<textarea
-								className="form-control w-75"
-								id="input-description"
-								value={description}
-								autoComplete="off"
-								onChange={(e) =>
-									dispatch(changeDescription(e.target.value.trim()))
-								}
-								required
-							/>
-						</div>
-						<div className="d-flex flex-column align-items-center mb-3">
-							<label
-								htmlFor="input-image"
-								className="form-label w-75 text-start"
-							>
-								Hình ảnh
-							</label>
-							<input
-								type="file"
-								className="form-control w-75"
-								id="input-image"
-								accept="image/*"
-								autoComplete="off"
-								onChange={handleImageChange}
-								required
-							/>
-							{image && <img src={image} alt="preview" className="w-75 mt-3" />}
-						</div>
-						<div className="d-flex justify-content-center mt-4">
-							<button
-								type="button"
-								className="btn btn-secondary col-3"
-								style={{ marginRight: '20px' }}
-								onClick={() => navigate(-1)}
-							>
-								Quay lại
-							</button>
-							<button type="submit" className="btn btn-primary col-3">
-								Cập nhật sản phẩm
-							</button>
+						<div className="row">
+							<div className="col-lg-6 col-md-8 col-sm-12 mx-auto">
+								<div className="mb-3">
+									<label htmlFor="input-name" className="form-label">
+										Tên sản phẩm
+									</label>
+									<input
+										type="text"
+										className="form-control"
+										id="input-name"
+										value={name}
+										autoComplete="off"
+										onChange={(e) =>
+											dispatch(changeName(e.target.value.replace(/\s/g, '')))
+										}
+										required
+									/>
+								</div>
+								<div className="mb-3">
+									<label htmlFor="input-price" className="form-label">
+										Giá gốc
+									</label>
+									<input
+										type="number"
+										className="form-control"
+										id="input-price"
+										value={price}
+										autoComplete="off"
+										onChange={(e) =>
+											dispatch(changePrice(e.target.value as unknown as number))
+										}
+										required
+									/>
+								</div>
+								<div className="mb-3">
+									<label htmlFor="input-currentPrice" className="form-label">
+										Ưu đãi
+									</label>
+									<input
+										type="number"
+										className="form-control"
+										id="input-currentPrice"
+										value={currentPrice}
+										autoComplete="off"
+										onChange={(e) =>
+											dispatch(
+												changeCurrentPrice(e.target.value as unknown as number),
+											)
+										}
+										required
+									/>
+								</div>
+								<div className="mb-3">
+									<label htmlFor="input-description" className="form-label">
+										Mô tả
+									</label>
+									<textarea
+										className="form-control"
+										id="input-description"
+										value={description}
+										autoComplete="off"
+										onChange={(e) =>
+											dispatch(changeDescription(e.target.value.trim()))
+										}
+										required
+									/>
+								</div>
+								<div className="mb-3">
+									<label htmlFor="input-image" className="form-label">
+										Hình ảnh
+									</label>
+									<input
+										type="file"
+										className="form-control"
+										id="input-image"
+										accept="image/*"
+										autoComplete="off"
+										onChange={handleImageChange}
+										required
+									/>
+									{image && <img src={image} alt="preview" className="w-100 mt-3" />}
+								</div>
+								<div className="d-flex justify-content-center mt-4">
+									<button
+										type="button"
+										className="btn btn-secondary col-3"
+										style={{ marginRight: '20px' }}
+										onClick={() => navigate(-1)}
+									>
+										Quay lại
+									</button>
+									<button type="submit" className="btn btn-primary col-3">
+										Cập nhật sản phẩm
+									</button>
+								</div>
+							</div>
 						</div>
 					</form>
 				</div>
 			</div>
 		</>
 	);
+
 };
 
 export default UpdateProductForm;

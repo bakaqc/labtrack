@@ -39,7 +39,7 @@ const ProductDetailForm = (props: ProductDetailFormProps) => {
 			<h6 className="display-6 mb-4 text-center">Thông tin sản phẩm</h6>
 			<div className="container mt-5 w-75 shadow-lg py-5">
 				<div className="row">
-					<div className="d-flex flex-column align-items-center justify-content-center col-6">
+					<div className="d-flex flex-column align-items-center justify-content-center col-lg-6 col-md-12">
 						<img
 							src={product.image}
 							alt="Product"
@@ -47,7 +47,7 @@ const ProductDetailForm = (props: ProductDetailFormProps) => {
 							style={{ width: '500px', height: '500px' }}
 						/>
 					</div>
-					<div className="col-6">
+					<div className="col-lg-6 col-md-12">
 						<p className="mb-4 text-start h4">
 							<strong>{product.name}</strong>
 						</p>
