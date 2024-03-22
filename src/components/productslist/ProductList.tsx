@@ -45,7 +45,7 @@ const ProductListTable = () => {
 		}).then((result) => {
 			if (result.isConfirmed) {
 				axios
-					.delete(`http://localhost:5555/products/${id}`)
+					.delete(`${SERVER_URL}/products/${id}`)
 					.then(() => {
 						setProducts(products.filter((product) => product.id !== id));
 						Swal.fire('Xóa thành công!', 'Sản phẩm đã được xóa.', 'success');
